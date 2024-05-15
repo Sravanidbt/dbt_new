@@ -1,0 +1,37 @@
+version: 2
+models:
+  - name: airbnb
+    schema: raw
+    tables:
+      - name: dim_raw_data_emp  
+        identifier: employee details 
+        columns:
+
+          - name: empid
+            tests:
+                 - unique
+                 - not_null
+
+          - name: kind
+            - accepted_values:
+              values: person
+
+          - name: age
+            tests:
+              - positive_value
+              - not_null
+
+          - name: gender
+            tests:
+            - accepted_values:
+              values:
+                - Male
+                - Female
+          - name: areaCode
+            tests:
+              - dbt_expectations.expect_column_value_lengths_to_equal:
+                value: 3
+          - name: phoneNumber
+            tests:
+              - dbt_expectations.expect_column_value_lengths_to_equal:
+                value: 7
