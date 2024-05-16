@@ -1,0 +1,24 @@
+version: 2
+models:
+
+    - name: dim_raw_data_child
+      description: personal details of child
+      columns:
+          - name: empid
+            description: Primary key for the employee.
+            tests:
+                - not_null
+          - name: name
+            description: Name of the child
+            tests:
+                - only_alphabets
+                - accepted_values:
+                    values: ['null','Jane','John','Earl','Sam','Kit']
+          - name: age
+            tests:
+                - positive_value
+          - name: gender
+            tests:
+                - accepted_values:
+                    values: ['Female','Male']
+          
